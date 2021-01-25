@@ -22,7 +22,7 @@
 // Return a number.
 
 function getTotalPassengers(data) {
-	return 0
+	return data.length
 }
 
 // 2 ---------------------------------------------------------------
@@ -31,7 +31,8 @@ function getTotalPassengers(data) {
 // Return a number.
 
 function getSurvivorCount(data) {
-	return 0
+	return data.filter(i => i.fields.survived === 'Yes').length
+
 }
 
 // 3 ---------------------------------------------------------------
@@ -39,7 +40,7 @@ function getSurvivorCount(data) {
 // Return a number.
 
 function getCasualityCount(data) {
-	return 0
+	return data.filter(i => i.fields.survived === 'No' || '').length
 }
 
 // 4 ---------------------------------------------------------------
