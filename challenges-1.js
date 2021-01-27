@@ -67,7 +67,7 @@ function getSurvivorCountForClass(data, pclass) {
 // the number of passengers who did not survive for that class. 
 
 function getCasualityCountForClass(data, pclass) {
-	return 0
+	return (data.filter(i => i.fields.pclass == pclass && i.fields.survived === 'No' )).length
 }
 
 // 7 ---------------------------------------------------------------
@@ -75,14 +75,18 @@ function getCasualityCountForClass(data, pclass) {
 // passenger data where the age is missing. 
 
 function getMinAge(data) {
-	return 0
+	const ages = data.filter(p => p.fields.age !== undefined).map(p => p.fields.age )
+	const minAge = Math.min( ...ages)
+	return minAge
 }
 
 // 8 ---------------------------------------------------------------
 // Return the age of the oldest passenger. 
 
 function getMaxAge(data) {
-	return 0
+	const ages = data.filter(p => p.fields.age !== undefined).map(p => p.fields.age )
+	const maxAge = Math.max( ...ages)
+	return maxAge
 }
 
 // 9 ---------------------------------------------------------------
@@ -99,7 +103,9 @@ function getEmbarkedCount(data, embarked) {
 // for some passengers you'll need to filter this out! 
 
 function getMinFare(data) {
-	return 0
+	const fares = data.map(p => p.fields.fare) 
+	const minFares = Math.min( ...fares)
+	return minFares
 }
 
 // 11 ---------------------------------------------------------------
@@ -107,7 +113,9 @@ function getMinFare(data) {
 // passengers are missing data for fare.
 
 function getMaxFare(data) {
-	return 0
+	const fares = data.map(p => p.fields.fare) 
+	const maxFares = Math.max( ...fares)
+	return maxFares
 }
 
 // 12 ---------------------------------------------------------------
