@@ -50,7 +50,7 @@ function getCasualityCount(data) {
 // Return a number
 
 function countPassengersInClass(data, pclass) {
-	return 0
+	return data.filter( p => p.fields.pclass === pclass ).length
 }
 
 // 5 ---------------------------------------------------------------
@@ -58,7 +58,7 @@ function countPassengersInClass(data, pclass) {
 // the data and passenger class. Return only passengers  
 
 function getSurvivorCountForClass(data, pclass) {
-	return 0
+	return data.filter(p => p.fields.survived === 'Yes' && p.fields.pclass === pclass).length
 }
 
 // 6 ---------------------------------------------------------------
@@ -161,7 +161,9 @@ function getCasualitiesByPClass(data, pclass) {
 // function should return: ['S', 'C', 'Q']
 
 function getUniqueValues(data, property) {
-	return 0
+	const emb = data.map(p => p.fields[property])
+	const uni = new Set(emb)
+	return Array.from(uni)
 }
 
 // 18 ---------------------------------------------------------------
