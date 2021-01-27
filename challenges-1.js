@@ -31,7 +31,7 @@ function getTotalPassengers(data) {
 // Return a number.
 
 function getSurvivorCount(data) {
-	return data.filter(i => i.fields.survived === 'Yes').length
+	return data.filter(p => p.fields.survived === 'Yes').length
 
 }
 
@@ -40,7 +40,7 @@ function getSurvivorCount(data) {
 // Return a number.
 
 function getCasualityCount(data) {
-	return data.filter(i => i.fields.survived === 'No' || '').length
+	return data.filter(p => p.fields.survived === 'No' || '').length
 }
 
 // 4 ---------------------------------------------------------------
@@ -95,7 +95,7 @@ function getMaxAge(data) {
 // or Q. 
 
 function getEmbarkedCount(data, embarked) {
-	return 0
+	return data.filter(p => p.fields.embarked === embarked).length
 }
 
 // 10 ---------------------------------------------------------------
@@ -122,35 +122,37 @@ function getMaxFare(data) {
 // Return the count of passengers by gender. 
 
 function getPassengersByGender(data, gender) {
-	return 0
+	return data.filter(p => p.fields.sex === gender).length
 }
 
 // 13 ---------------------------------------------------------------
 // Return the number of passengers who survived by gender. 
 
 function getSurvivorsByGender(data, gender) {
-	return 0
+	return data.filter(p => p.fields.survived === 'Yes' && p.fields.sex === gender).length
+
 }
 
 // 14 ---------------------------------------------------------------
 // Return the number of passengers who did not survived by gender. 
 
 function getCasualitiesByGender(data, gender) {
-	return 0
+	return data.filter(p => p.fields.survived === 'No' && p.fields.sex === gender).length
 }
 
 // 15 ---------------------------------------------------------------
 // Return the number of passengers who survived by passenger class.
 
 function getSurvivorsByPClass(data, pclass) {
-	return 0
+	return data.filter(p => p.fields.pclass === pclass && p.fields.survived === 'Yes').length
 }
 
 // 16 ---------------------------------------------------------------
 // Return the number of passengers who survived by passenger class.
 
 function getCasualitiesByPClass(data, pclass) {
-	return 0
+	return data.filter(p => p.fields.pclass === pclass && p.fields.survived === 'Yes' || ' ').length
+
 }
 
 // 17 ---------------------------------------------------------------
@@ -172,21 +174,26 @@ function getUniqueValues(data, property) {
 // missing from the data. 
 
 function getAllOfField(data, field) {
-	return 0
+	// const emb = data
+	// 	.map(p => p.field)
+	// 	.filter(p => p !== undefined)
+	// return emb.length
 }
 
 // 19 --------------------------------------------------------------
 // Return the total of all fares paid. 
 
 function getTotalFare(data) {
-	return 0
+	return data.reduce((acc, data) => acc + data.fields.fare, 0)
+	
 }
 
 // 20 --------------------------------------------------------------
 // Return the average fare paid.
 
 function getAverageFare(data) {
-	return 0
+	const fares = data.filter(p => p.fields.fare !== undefined).map(p => p.fields.fare)
+	return fares.reduce((acc, fare) => acc + fare, 0) / data.length
 }
 
 // 21 --------------------------------------------------------------
@@ -201,7 +208,8 @@ function getMedianFare(data) {
 // Return the average age of all passengers. 
 
 function getAverageAge(data) {
-	return 0
+	const ages = data.filter(p => p.fields.age !== undefined).map(p => p.fields.age)
+	return ages.reduce((acc, age) => acc + age, 0) / ages.length
 }
 
 // 23 --------------------------------------------------------------
@@ -215,7 +223,8 @@ function getMedianAge(data) {
 // 
 
 function getAverageAgeByGender(data, gender) {
-	return 0
+	const ages = data.filter(p => p.fields.age !== undefined && p.fields.sex == gender).map(p => p.fields.age)
+	return ages.reduce((acc, age) => acc + age, 0) / ages.length
 }
 
 // --------------------------------------------------------------
